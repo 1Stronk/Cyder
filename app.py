@@ -4,9 +4,6 @@ import configparser
 from xeger import Xeger
 import logging.handlers
 import os
-from vfssh.CyderSSHServer import start_ssh_server
-from connection.server_telnet import start_telnet_server
-from connection.server_http import start_http_server
 from multiprocessing import Process
 import gconstant as gc
 
