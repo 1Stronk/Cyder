@@ -36,28 +36,6 @@ def main():
         except ValueError:
             pass
 
-    #  SSH Server (AsyncSSH)
-    if config.getboolean('HOST', 'ssh', fallback=False):
-        print('SSH Enabled')
-        start_service(services[22].strip(), 22, '0.0.0.0', start_ssh_server)
-        del services[22]
-
-    #  Telnet Server (Twisted)
-    if config.getboolean('HOST', 'telnet', fallback=False):
-        print('Telnet Enabled')
-        start_service(services[23], 23, '0.0.0.0', start_telnet_server)
-        del services[23]
-
-    #  HTTP Server (Waitress)
-    if config.getboolean('HOST', 'http', fallback=False):
-        print('HTTP Enabled')
-        start_service(services[80].strip(), 80, '0.0.0.0', start_http_server)
-        del services[80]
-
-    #  Port 2323
-    start_service(services[2323], 2323, '0.0.0.0', start_telnet_server)
-    del services[2323]
-
     #  Add Device To Subnet
     addNewDevice(name='HOST', services=services, fingerprint=config.get('HOST', 'fingerprint'),
                  ip=ip, mac_addr=mac_addr)
@@ -66,14 +44,6 @@ def main():
     print('Done Loading...')
     debug.debug('Done Loading...')
     startIntercept()
-
-
-def start_service(banner, port, host, target):
-    #  Function to run SSH / Telnet / HTTP in multiprocess
-    mp = Process(target=target, args=(host, port, banner,))
-    mp.daemon = True
-    mp.start()
-
 
 def process(data, limit=10, increment=100):
     #  Process Regex - Increment 150 ~ 7.9 seconds
