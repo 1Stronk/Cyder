@@ -5,24 +5,9 @@ Other than being able to spoof the operating system, it is also able to run an i
 
 
 ## Features
-
 - Operating System Spoofing
 
     - The main function of Cyder is that it is able to spoof any operating system as well as services that exists in the NMAP database.
-
-- SSH Emulation
-
-    - Allow attackers to enter an emulated SSH environment and see what commands are being inputted
-    - Virtual File System, with the ability to choose what kind of files and content
-    - Allows attacker to pivot their attack through SSH to another private network. These networks can choose to have a different virtual file system.
-
-- Telnet Emulation
-
-    - A simple Telnet emulation that prompts the attacker for credentials, then logs the attempt
-
-- HTTP Emulation
-
-    - A simple Flask website, running behind Waitress that prompts a simple basic authorization, when visited.
 
 - Service Echo
     - Echo backs a specified banner or version number to the attacker that prompt the service port number
@@ -63,8 +48,6 @@ However, any other Operating System **MIGHT** work if it have the following libr
 - Highly unrecommended to run it on other Linux.
 
 ## Guide
-**DO REMEMBER TO CHANGE THE DEFAULT SSH SERVICE PORT 22 TO OTHER PORT NUMBER**
-
 After installing, do configure Cyder configurations before running the Honeypot. 
 
 - The configuration file can be found at:
@@ -83,8 +66,8 @@ debug = true
 ip = 192.168.1.154 ; Change this to your device ip
 mac_address = E2:FA:A8:BD:E6:04 ; Can be set to false to disable change of mac address
 http = false
-ssh = true
-telnet = true
+ssh = false
+telnet = false
 file_system = ./configuration/fs/default_fs.json
 
 fingerprint = SEQ(SP=D-17%GCD=6400|FA00%ISR=97-A1%TI=I%II=I%SS=S%TS=U)
